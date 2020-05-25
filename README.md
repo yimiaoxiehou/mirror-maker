@@ -60,7 +60,7 @@ services:
     environment:
       - SOURCE=mysourcekafka.example.com:9092
       - DESTINATION=kafka:9092
-      - WHITELIST=RawBayAis
+      - WHITELIST=Topic1,Topic2
 
 
 volumes:

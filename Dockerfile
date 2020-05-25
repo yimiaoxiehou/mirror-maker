@@ -13,5 +13,5 @@ ENV SOURCE "localhost:6667"
 ENV SECURITY "PLAINTEXT"
 ENV GROUPID "_mirror_maker"
 
-USER noroot
+USER 1001
 CMD /run.sh
