@@ -15,12 +15,13 @@ docker build -t mirror-maker:latest .
 **Note: Docker is expected to be installed where you run the build**
 
 ### Environment Variables
-|    Variable Name    |                   Description                |   Defaults |
+|    Variable Name    |                   Description                |   Default |
 |---------------------|----------------------------------------------|------------|
 |    DESTINATION      | bootstrap.servers for the Destination Kafka Cluster |localhost:6667|
 |      SOURCE         | bootstrap.servers for the Source Kafka Cluster |localhost:6667|
 |     WHITELIST       | Topics to mirror     | * |
 |     GROUPID         | Consumer group id for Kafka consumer | _mirror_maker |
+|    NUM_STREAMS      | Number of consumer streams to use | 1 |
 
 #### Docker usage
 ```
