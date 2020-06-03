@@ -2,13 +2,6 @@
 
 set -e
 
-envsubst < /opt/mirrormaker/producer.template > /var/run/mirrormaker/producer.config
-envsubst < /opt/mirrormaker/consumer.template > /var/run/mirrormaker/consumer.config
+envsubst < /opt/mirrormaker/mm2.template > /var/run/mirrormaker/mm2.config
 
-/opt/bitnami/kafka/bin/kafka-mirror-maker.sh \
-    --abort.on.send.failure true \
-    --new.consumer \
-    --producer.config /var/run/mirrormaker/producer.config \
-    --consumer.config /var/run/mirrormaker/consumer.config \
-    --num.streams "${NUM_STREAMS:-1}" \
-    --whitelist "${WHITELIST}"
+/opt/bitnami/kafka/bin/connect-mirror-maker.sh /var/run/mirrormaker/mm2.config

@@ -2,20 +2,16 @@ FROM bitnami/kafka:2
 USER root
 RUN install_packages gettext
 
-ADD ./consumer.config /opt/mirrormaker/consumer.template
-ADD ./producer.config /opt/mirrormaker/producer.template
+ADD ./mm2.template /opt/mirrormaker/mm2.template
 ADD ./run.sh /opt/mirrormaker/run.sh
 RUN chmod +x /opt/mirrormaker/run.sh
 
 RUN mkdir -p /var/run/mirrormaker
 RUN chown 1234 /var/run/mirrormaker
 
-ENV WHITELIST *
-ENV DESTINATION "localhost:6667"
-ENV SOURCE "localhost:6667"
-ENV SECURITY "PLAINTEXT"
-ENV GROUPID "_mirror_maker"
-ENV NUM_STREAMS "1"
+ENV TOPICS .*
+ENV DESTINATION "source-cluster:9092"
+ENV SOURCE "localhost:9092"
 
 USER 1234
 CMD /opt/mirrormaker/run.sh

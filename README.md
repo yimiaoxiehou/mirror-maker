@@ -1,7 +1,8 @@
 # mirror-maker
 
 A mirror-maker container based on [bitnami/kafka](https://hub.docker.com/r/bitnami/kafka/) and
- [srotya/docker-kafka-mirror-maker](https://github.com/srotya/docker-kafka-mirror-maker).  
+ [srotya/docker-kafka-mirror-maker](https://github.com/srotya/docker-kafka-mirror-maker). Now uses
+ [MirrorMaker 2](https://cwiki.apache.org/confluence/display/KAFKA/KIP-382%3A+MirrorMaker+2.0)
 
 ### Build
 This image is available from Docker hub however, if you would like to build it yourself here are the steps:
@@ -17,15 +18,13 @@ docker build -t mirror-maker:latest .
 ### Environment Variables
 |    Variable Name    |                   Description                |   Default |
 |---------------------|----------------------------------------------|------------|
-|    DESTINATION      | bootstrap.servers for the Destination Kafka Cluster |localhost:6667|
-|      SOURCE         | bootstrap.servers for the Source Kafka Cluster |localhost:6667|
-|     WHITELIST       | Topics to mirror     | * |
-|     GROUPID         | Consumer group id for Kafka consumer | _mirror_maker |
-|    NUM_STREAMS      | Number of consumer streams to use | 1 |
+|      SOURCE         | bootstrap.servers for the source kafka       |source-cluster:9092|
+|    DESTINATION      | bootstrap.servers for the destination kafka  |localhost:9092|
+|     TOPICS          | Topics to mirror     | .* |
 
 #### Docker usage
 ```
-docker run -it -e DESTINATION=xxx.xxx.com:9092 -e SOURCE=xxx.xxx.com:9092 -e WHITELIST=<TOPIC NAME> mirror-maker:latest
+docker run -it -e SOURCE=from.example.com:9092 -e DESTINATION=to.example.com:9092 -e TOPICS=<TOPIC NAME> mirror-maker:latest
 ```
 
 #### Docker-compose usage
@@ -61,7 +60,7 @@ services:
     environment:
       - SOURCE=mysourcekafka.example.com:9092
       - DESTINATION=kafka:9092
-      - WHITELIST=Topic1,Topic2
+      - TOPICS=Topic1,Topic2
 
 
 volumes:
