@@ -7,9 +7,9 @@ A->B.enabled = true
 
 A->B.topics = ${TOPICS}
 
-replication.policy.separator = ""
-source.cluster.alias = ""
-target.cluster.alias = ""
+replication.policy.separator =
+source.cluster.alias = 
+target.cluster.alias =
 
 ############################# Internal Topic Settings  #############################
 # The replication factor for mm2 internal topics "heartbeats", "B.checkpoints.internal" and
