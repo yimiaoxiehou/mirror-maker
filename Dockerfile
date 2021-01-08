@@ -12,6 +12,9 @@ RUN chown 1234 /var/run/mirrormaker
 ENV TOPICS .*
 ENV DESTINATION "source-cluster:9092"
 ENV SOURCE "localhost:9092"
+ENV REPLICATION_FACTOR 1
+ENV ACLS_ENABLED "false"
+ENV TASKS_MAX 10
 
 USER 1234
 CMD /opt/mirrormaker/run.sh
